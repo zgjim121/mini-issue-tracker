@@ -14,6 +14,11 @@ class Project extends Model
         'description'
     ];
 
+    protected $casts = [
+        'start_date' => 'date',
+        'deadline' => 'date',
+    ];
+
     public function issues(): HasMany
     {
         return $this->hasMany(Issue::class);
