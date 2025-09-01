@@ -9,9 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Project extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'start_date',
+        'deadline',
     ];
 
     protected $casts = [

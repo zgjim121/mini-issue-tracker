@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IssueRequest;
+use App\Models\Issue;
+use App\Models\Project;
+use App\Models\Tag;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class IssueController extends Controller
 {
@@ -10,15 +16,15 @@ class IssueController extends Controller
     {
         $query = Issue::with(['project', 'tags']);
 
-        if($request->filled('status')) {
+        if ($request->filled('status')) {
             $query->status($request->status);
         }
 
-        if($request->filled('priority')) {
+        if ($request->filled('priority')) {
             $query->priority($request->priority);
         }
 
-        if($request->filled('tag')) {
+        if ($request->filled('tag')) {
             $query->withTag($request->tag);
         }
 
@@ -26,24 +32,24 @@ class IssueController extends Controller
         $projects = Project::orderBy('name')->get();
         $tags = Tag::orderBy('name')->get();
 
-        return view('issues.index', compact('issues', 'projects', 'tags'));   
+        return view('issues.index', compact('issues', 'projects', 'tags'));
     }
 
     public function create(): View
     {
         $projects = Project::orderBy('name')->get();
-
+        
         return view('issues.create', compact('projects'));
     }
 
-    public function store(IssueStoreRequest $request): RedirectResponse
+    public function store(IssueRequest $request): RedirectResponse
     {
         $issue = Issue::create($request->validated());
 
         return redirect()->route('issues.show', $issue)
-        ->with('success', 'Issue created successfully');
+            ->with('success', 'Issue created successfully.');
     }
-    
+
     public function show(Issue $issue): View
     {
         $issue->load(['project', 'tags', 'comments' => function ($query) {
