@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 Route::resource('projects', ProjectController::class);
 Route::resource('issues', IssueController::class);
-Route::resource('tags', TagController::class)->only(['index', 'show']);
+Route::resource('tags', TagController::class)->only(['index', 'show', 'store']);
 
 //AJAX routes for issue tags
 Route::post('issues/{issue}/tags', [IssueController::class, 'store'])->name('issues.tags.store');
