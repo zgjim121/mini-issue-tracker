@@ -13,6 +13,7 @@ class Issue extends Model
     use HasFactory;
 
     protected $fillable = [
+        'project_id',
         'title',
         'description',
         'status',
