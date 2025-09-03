@@ -32,7 +32,7 @@ class ProjectController extends Controller
 
     public function show(Project $project): View
     {
-        $project->load('issues.tag');
+        $project->load('issues.tags');
 
         return view('projects.show', compact('project'));
     }
