@@ -18,6 +18,6 @@ class tag extends Model
 
     public function issues(): BelongsToMany
     {
-        return $this->belongsToMany(Issue::class);
+        return $this->belongsToMany(Issue::class, 'issue_tag', 'tag_id', 'issue_id');
     }
 }
