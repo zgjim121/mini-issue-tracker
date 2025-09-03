@@ -14,10 +14,10 @@ Route::get('/', function () {
 
 Route::resource('projects', ProjectController::class);
 Route::resource('issues', IssueController::class);
-Route::resource('tags', TagController::class)->only(['index', 'show', 'store']);
+Route::resource('tags', TagController::class)->only(['index', 'store']);
 
 //AJAX routes for issue tags
-Route::post('issues/{issue}/tags', [IssueController::class, 'store'])->name('issues.tags.store');
+Route::post('issues/{issue}/tags', [IssueTagController::class, 'store'])->name('issues.tags.store');
 Route::delete('issues/{issue}/tags/{tag}', [IssueTagController::class, 'destroy'])->name('issues.tags.destroy');
 
 //AJAX Routes for comments
